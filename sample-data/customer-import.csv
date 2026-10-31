@@ -1,0 +1,5 @@
+customer_id,email,date,amount
+00123,jan@example.test,2026-10-31,12.30
+00123,jan@example.test,2026-10-31,12.30
+00456,test@example.test,2026-02-30,5
+00789,other@example.test,2026-10-31,9.99
