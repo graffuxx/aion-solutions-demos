@@ -1,0 +1,78 @@
+{
+  "label": "Synthetic demonstrations; not client work",
+  "demos": {
+    "api-recovery": {
+      "result": {
+        "event_id": "demo-001",
+        "accepted": true
+      },
+      "log": [
+        {
+          "attempt": 1,
+          "status": "HTTP 503",
+          "retryable": true
+        },
+        {
+          "attempt": 2,
+          "status": "response lost after destination committed",
+          "retryable": true
+        },
+        {
+          "attempt": 3,
+          "status": "accepted"
+        }
+      ],
+      "destination_rows": 1,
+      "backoff_seconds": [
+        1,
+        2
+      ]
+    },
+    "csv-validation": {
+      "accepted_rows": 2,
+      "rejected_rows": 2,
+      "accepted": [
+        {
+          "customer_id": "00123",
+          "email": "jan@example.test",
+          "date": "2026-10-31",
+          "amount": "12.30"
+        },
+        {
+          "customer_id": "00789",
+          "email": "other@example.test",
+          "date": "2026-10-31",
+          "amount": "9.99"
+        }
+      ],
+      "rejected": [
+        {
+          "line": 3,
+          "reason": "duplicate_id",
+          "original": {
+            "customer_id": "00123",
+            "email": "jan@example.test",
+            "date": "2026-10-31",
+            "amount": "12.30"
+          }
+        },
+        {
+          "line": 4,
+          "reason": "invalid_date",
+          "original": {
+            "customer_id": "00456",
+            "email": "test@example.test",
+            "date": "2026-02-30",
+            "amount": "5"
+          }
+        }
+      ],
+      "clean_csv": "customer_id,email,date,amount\n00123,jan@example.test,2026-10-31,12.30\n00789,other@example.test,2026-10-31,9.99\n"
+    },
+    "sql-debugging": {
+      "broken_cents": 30000,
+      "fixed_cents": 20000,
+      "expected_cents": 20000
+    }
+  }
+}
